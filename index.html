@@ -62,7 +62,7 @@ header {
   overflow: hidden;
 }
 
-/* ✅ YOUR IMAGE REPLACEMENT */
+/* ✅ FIXED IMAGE - Multiple fallbacks */
 header::after {
   content: '';
   position: absolute;
@@ -70,13 +70,24 @@ header::after {
   top: 20px;
   width: 240px;
   height: 240px;
-  background-image: url("./image/1000023240.WEBP");
+  /* Priority 1: Local image (rename your file to profile.jpg) */
+  background-image: 
+    url("assets/profile.jpg"),
+    /* Priority 2: Alternative local path */
+    url("image/1000023240.WEBP"),
+    /* Priority 3: Online placeholder (works everywhere) */
+    url("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=240&h=240&fit=crop&crop=face"),
+    /* Priority 4: Simple colored fallback */
+    linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   border-radius: 24px;
   opacity: 0.55;
   filter: grayscale(10%) contrast(1.1);
   pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .tag {
@@ -175,6 +186,15 @@ footer {
   font-size: 12px;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+  header::after {
+    width: 180px;
+    height: 180px;
+    top: 10px;
+    right: 10px;
+  }
+}
 </style>
 </head>
 
@@ -189,7 +209,7 @@ footer {
 
   <div class="meta">
     <a href="mailto:rojanthapamagar10@gmail.com">rojanthapamagar10@gmail.com</a>
-    • London, UK • IELTS 7.0
+    - London, UK • IELTS 7.0
   </div>
 
   <p class="profile">
